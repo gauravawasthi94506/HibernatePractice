@@ -29,9 +29,7 @@ public class EmployeeDetails {
 	@Column
 	private String userName;
 	
-	@OneToMany
-	@JoinTable(name="user_vehicle",joinColumns=@JoinColumn(name="user_id"),
-				inverseJoinColumns=@JoinColumn(name="vehicle_id") )
+	@OneToMany(mappedBy="ed")
 	private Collection<Vehicle> svc=new ArrayList<Vehicle>();
 	
 	public Collection<Vehicle> getSvc() {
