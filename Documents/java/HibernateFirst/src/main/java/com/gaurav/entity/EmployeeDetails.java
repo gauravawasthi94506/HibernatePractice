@@ -1,5 +1,7 @@
 package com.gaurav.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,18 +28,17 @@ public class EmployeeDetails {
 	private int userId;
 	@Column
 	private String userName;
-	@Embedded
 	
-	@ElementCollection(fetch=FetchType.EAGER)
-	@JoinTable(name="user_address")
-	private Set<Address> listOfAddress=new HashSet<Address>();
+	@OneToMany
+	@JoinTable(name="user_vehicle",joinColumns=@JoinColumn(name="user_id"),
+				inverseJoinColumns=@JoinColumn(name="vehicle_id") )
+	private Collection<Vehicle> svc=new ArrayList<Vehicle>();
 	
-	
-	public Set<Address> getListOfAddress() {
-		return listOfAddress;
+	public Collection<Vehicle> getSvc() {
+		return svc;
 	}
-	public void setListOfAddress(Set<Address> listOfAddress) {
-		this.listOfAddress = listOfAddress;
+	public void setSvc(Collection<Vehicle> svc) {
+		this.svc = svc;
 	}
 	public int getUserId() {
 		return userId;
