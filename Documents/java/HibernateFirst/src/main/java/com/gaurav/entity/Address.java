@@ -16,8 +16,7 @@ public class Address {
 	private String city;
 	@Column(name="Streat_State")
 	private String state;
-	@Column(name="Creation_Date")
-	private Date date;
+
 	@Column(name="PinCode")
 	private int pincode;
 	public String getStreet() {
@@ -38,12 +37,7 @@ public class Address {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
+	
 	public int getPincode() {
 		return pincode;
 	}

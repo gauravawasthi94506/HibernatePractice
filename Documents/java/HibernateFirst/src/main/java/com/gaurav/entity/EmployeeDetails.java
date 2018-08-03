@@ -1,17 +1,23 @@
 package com.gaurav.entity;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="EmployeeDetails1")
+@Table(name="EmployeeDetails")
 public class EmployeeDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,37 +26,16 @@ public class EmployeeDetails {
 	private String userName;
 	@Embedded
 	
-	@AttributeOverrides({
-		@AttributeOverride(name = "street",column = @Column(name="Streat_Name_HOME")),
-		@AttributeOverride(name = "city",column = @Column(name="City_Name_HOME")),
-		@AttributeOverride(name = "state",column = @Column(name="State_Name_HOME")),
-		@AttributeOverride(name = "pincode",column = @Column(name="Pincode_Name_HOME")),
-		@AttributeOverride(name = "date",column = @Column(name="Date_Name_HOME"))
-		})
-	private Address adr_home;
-	
-	/*@AttributeOverrides({
-		@AttributeOverride(name = "street",column = @Column(name="Office_Name_HOME")),
-		@AttributeOverride(name = "city",column = @Column(name="Office_Name_HOME")),
-		@AttributeOverride(name = "state",column = @Column(name="office_Name_HOME")),
-		@AttributeOverride(name = "pincode",column = @Column(name="Office_Name_HOME")),
-		@AttributeOverride(name = "date",column = @Column(name="office_Name_HOME"))
-		})*/
-	private Address adr_office;
+	@ElementCollection(fetch=FetchType.EAGER)
+	@JoinTable(name="user_address")
+	private Set<Address> listOfAddress=new HashSet<Address>();
 	
 	
-	
-	public Address getAdr_office() {
-		return adr_office;
+	public Set<Address> getListOfAddress() {
+		return listOfAddress;
 	}
-	public void setAdr_office(Address adr_office) {
-		this.adr_office = adr_office;
-	}
-	public Address getAdr_home() {
-		return adr_home;
-	}
-	public void setAdr_home(Address adr_home) {
-		this.adr_home = adr_home;
+	public void setListOfAddress(Set<Address> listOfAddress) {
+		this.listOfAddress = listOfAddress;
 	}
 	public int getUserId() {
 		return userId;
@@ -64,6 +49,4 @@ public class EmployeeDetails {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
-	
 }
