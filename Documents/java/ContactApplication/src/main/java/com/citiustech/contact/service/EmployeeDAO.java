@@ -1,4 +1,4 @@
-package com.citiustech.contact.Dao;
+package com.citiustech.contact.service;
 
 import java.util.List;
 
