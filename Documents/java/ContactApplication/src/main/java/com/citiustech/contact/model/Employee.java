@@ -7,6 +7,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,9 +36,17 @@ public class Employee {
 	private String expertise;
 	
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@LastModifiedDate
-	private Date createdAt;
+/*	
+	@OneToOne
+	private Address adr;
+	
+	public Address getAdr() {
+		return adr;
+	}
+
+	public void setAdr(Address adr) {
+		this.adr = adr;
+	}*/
 
 	public Long getId() {
 		return id;
@@ -71,12 +80,6 @@ public class Employee {
 		this.expertise = expertise;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
+	
 
 }
